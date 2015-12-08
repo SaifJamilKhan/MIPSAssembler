@@ -31,7 +31,7 @@ int valueOfLabel(string stringToCheck, map<string, int> labelMap) {
     return ((*labelMap.find(stringToCheck).operator->()).second);
 }
 
-enum IDCode { JR, JLR, ADD, SUB, SLT, NOTFOUND };
+enum IDCode { JR, JLR, ADD, SUB, SLT, SLTU, BEQ, BNE, NOTFOUND };
 
 IDCode getIDCode(string commandName) {
     if(commandName.compare("jr") == 0) {
@@ -44,6 +44,12 @@ IDCode getIDCode(string commandName) {
         return SUB;
     } else if(commandName.compare("slt") == 0){
         return SLT;
+    } else if(commandName.compare("sltu") == 0){
+        return SLTU;
+    } else if(commandName.compare("beq") == 0){
+        return BEQ;
+    } else if(commandName.compare("bne") == 0){
+        return BNE;
     } else {
         cerr << "No Such Code " << commandName;
         return NOTFOUND;
@@ -73,12 +79,20 @@ void jumpAndRegister(int registerValue, bool linkRegister) {
     printHexString(value);
 }
 
-void threeVariablesAndACommand(int first, int second, int third, int commandConstant) {
+void branch(int first, int second, int third, int commandConstant) {
     int value = (first << 21);
     value = value | (second << 16);
     value = value | (third << 11);
-    
-    value = third | commandConstant;
+    value = value | commandConstant;
+    printHexString(value);
+}
+
+
+void threeVariablesAndACommand(int first, int second, int third, int commandConstant) {
+    int value = (first << 21);
+    value = value | (second << 16);
+    value = value | (commandConstant << 26);
+    value = value | third;
     printHexString(value);
 }
 
@@ -95,6 +109,7 @@ int main(int argc, const char * argv[]) {
         bool isRealLine= false;
         
         std::vector<Token*> tokens = (*lexer).scan(input);
+        int idCode = getIDCode((*tokens.at(0)).getLexeme());
         for(int x = 0; x < tokens.size(); x++) {
             Token token = (*tokens[x]);
             if ((*tokens.at(x)).getKind() == LABEL){
@@ -110,16 +125,12 @@ int main(int argc, const char * argv[]) {
             if (x > 0) {
                 
                 if((*tokens[x -1]).getKind() == DOTWORD){
-                    if((*tokens[x]).getKind() == INT){
+                    if(tokens.at(x)->getKind() == INT){
+                        printHexString((*tokens.at(x)).toInt());
+                    } else if(tokens.at(x)->getKind() == ID) {
                         const string lexeme = token.getLexeme();
-                        int value = atoi(lexeme.c_str());
-                        printHexString(value);
-                    } else if((*tokens[x]).getKind() == ID) {
-                        const string lexeme = token.getLexeme();
-                    
                         if(stringContainsLable(lexeme, labelMap)) {
                             int value = valueOfLabel(lexeme, labelMap);
-                        
                             printHexString(value);
                         } else {
                             cerr << "Label not found: " << lexeme;
@@ -127,12 +138,11 @@ int main(int argc, const char * argv[]) {
                         
                     }
                 }
-                else if((*tokens[x -1]).getKind() == ID){
-                    int idCode = getIDCode((*tokens[x -1]).getLexeme());
+                else if((*tokens.at(x -1)).getKind() == ID){
                     
                     if(idCode == JR || idCode == JLR) {
-                        if((*tokens[x]).getKind() == REGISTER){
-                            string lexeme = (*tokens[x]).getLexeme();
+                        if((*tokens.at(x)).getKind() == REGISTER){
+                            string lexeme = (*tokens.at(x)).getLexeme();
                             int value = atoi(lexeme.substr(1, lexeme.size() - 1).c_str());
                             
                             if(idCode == JR) {
@@ -143,12 +153,58 @@ int main(int argc, const char * argv[]) {
                         }
                     }
                 }
-                else if((*tokens[x -4]).getKind() == ID){
+                else if(x == 5 && (*tokens.at(x - 5)).getKind() == ID){
                     
+                    if(idCode == ADD || idCode == SUB || idCode == SLT || idCode == SLTU) {
+                        for(int b = 0; b < 3; b++) {
+                            if((*tokens[x - b  * 2]).getKind() != REGISTER) {
+                                cerr << "Command had id code " << idCode << "but did not have all register as arguments";
+                                return -1;
+                            }
+                        }
+                        int firstValue = tokens.at(1)->toInt();
+                        int secondValue = tokens.at(3)->toInt();
+                        int thirdValue = tokens.at(5)->toInt();
+                        
+                        int commandValue = 0;
+                        switch (idCode) {
+                            case ADD:
+                                commandValue = 32;
+                                break;
+                            case SUB:
+                                commandValue = 34;
+                                break;
+                            case SLT:
+                                commandValue = 42;
+                                break;
+                            case SLTU:
+                                commandValue = 43;
+                                break;
+                        }
+                        
+                        threeVariablesAndACommand(secondValue, thirdValue, firstValue, commandValue);
+                    } else if(idCode == BEQ || idCode == BNE) {
+                        
+                        int thirdValue = tokens.at(5)->toInt();
+                        int secondValue = tokens.at(3)->toInt();
+                        int firstValue = tokens.at(1)->toInt();
+                        
+                        int commandValue = 0;
+                        switch (idCode) {
+                            case BEQ:
+                                commandValue = 4;
+                                break;
+                            case BNE:
+                                commandValue = 5;
+                                break;
+                        }
+                        
+                        threeVariablesAndACommand(firstValue, secondValue, thirdValue, commandValue);
+                    }
+
                 }
                 
             }
-            //            cout << "size is fuckiiing " << tokens.size();
             
         }
         if(isRealLine) {

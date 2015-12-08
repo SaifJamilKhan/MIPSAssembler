@@ -11,6 +11,12 @@
             <PersistentString
                value = "tokens">
             </PersistentString>
+            <PersistentString
+               value = "(*tokens[2])">
+            </PersistentString>
+            <PersistentString
+               value = "tokens.at(2)-&gt;getLexeme()">
+            </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
