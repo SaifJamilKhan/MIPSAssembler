@@ -99,17 +99,37 @@ void threeVariablesAndACommand(int first, int second, int third, int commandCons
 int main(int argc, const char * argv[]) {
     
     
-    std::string input;
-    std::getline (std::cin,input);
+    std::string singleLineInput;
+    std::getline (std::cin,singleLineInput);
+    std::string entireInput = singleLineInput;
     map<string, int> labelMap;
     int lineNumber = 0;
     
     Lexer* lexer = new Lexer();
-    while(input.size() > 0) {
+    
+    while(singleLineInput.size() > 0) {
+        
+        std::vector<Token*> tokens = (*lexer).scan(singleLineInput);
+        if ((*tokens.at(0)).getKind() == LABEL){
+            pair<string, int> pair = *new ::pair<string, int>();
+            pair.second = lineNumber;
+            pair.first = tokens.at(0)->getLexeme().substr(0, tokens.at(0)->getLexeme().size() - 1);
+            labelMap.insert(pair);
+        }
+        std::getline (std::cin,singleLineInput);
+        entireInput = entireInput + singleLineInput;
+    }
+    
+    std::istringstream iss(entireInput);
+    
+   for (std::string input; std::getline(iss, input); ) {
         bool isRealLine= false;
         
         std::vector<Token*> tokens = (*lexer).scan(input);
-        int idCode = getIDCode((*tokens.at(0)).getLexeme());
+        int idCode = NOTFOUND;
+        if(tokens.size() > 0 && tokens.at(0)->getKind() != LABEL) {
+            idCode = getIDCode((*tokens.at(0)).getLexeme());
+        }
         for(int x = 0; x < tokens.size(); x++) {
             Token token = (*tokens[x]);
             if ((*tokens.at(x)).getKind() == LABEL){
@@ -119,8 +139,10 @@ int main(int argc, const char * argv[]) {
                 labelMap.insert(pair);
             }
             else {
-                isRealLine = true;
-            }
+                if(!isRealLine) {
+                    lineNumber ++;
+                }
+                isRealLine = true;            }
             
             if (x > 0) {
                 
@@ -153,7 +175,7 @@ int main(int argc, const char * argv[]) {
                         }
                     }
                 }
-                else if(x == 5 && (*tokens.at(x - 5)).getKind() == ID){
+                else if(x >= 5 && (*tokens.at(x - 5)).getKind() == ID){
                     
                     if(idCode == ADD || idCode == SUB || idCode == SLT || idCode == SLTU) {
                         for(int b = 0; b < 3; b++) {
@@ -162,10 +184,10 @@ int main(int argc, const char * argv[]) {
                                 return -1;
                             }
                         }
-                        int firstValue = tokens.at(1)->toInt();
-                        int secondValue = tokens.at(3)->toInt();
-                        int thirdValue = tokens.at(5)->toInt();
-                        
+                        int firstValue = tokens.at(x-4)->toInt();
+                        int secondValue = tokens.at(x-2)->toInt();
+                        int thirdValue = tokens.at(x)->toInt();
+                    
                         int commandValue = 0;
                         switch (idCode) {
                             case ADD:
@@ -185,9 +207,24 @@ int main(int argc, const char * argv[]) {
                         threeVariablesAndACommand(secondValue, thirdValue, firstValue, commandValue);
                     } else if(idCode == BEQ || idCode == BNE) {
                         
-                        int thirdValue = tokens.at(5)->toInt();
-                        int secondValue = tokens.at(3)->toInt();
-                        int firstValue = tokens.at(1)->toInt();
+                        int thirdValue =  0;
+                        
+                        const string lexeme = tokens.at(x)->getLexeme();
+                        if(tokens.at(x)->getKind() == INT || tokens.at(x)->getKind() == HEXINT) {
+                            thirdValue = tokens.at(x)->toInt();
+                        }
+                        else if(stringContainsLable(lexeme, labelMap)) {
+                            thirdValue = valueOfLabel(lexeme, labelMap);
+                            thirdValue = thirdValue - lineNumber;
+                        }
+
+                        
+                        int secondValue = tokens.at(x-2)->toInt();
+                        int firstValue = tokens.at(x-4)->toInt();
+                        
+                        if(thirdValue < 0) {
+                            thirdValue = thirdValue & 0xffff;
+                        }
                         
                         int commandValue = 0;
                         switch (idCode) {
