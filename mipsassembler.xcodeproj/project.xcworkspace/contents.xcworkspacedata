@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:assignment3.xcodeproj">
+      location = "self:/Users/saifkhan/Developer/CS241/Assembler/mipsassembler.xcodeproj">
    </FileRef>
 </Workspace>

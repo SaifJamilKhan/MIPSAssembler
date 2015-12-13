@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "761AC5F81BF3CBCE003E6B31"
-               BuildableName = "assignment3"
-               BlueprintName = "assignment3"
-               ReferencedContainer = "container:assignment3.xcodeproj">
+               BuildableName = "Assembler"
+               BlueprintName = "Assembler"
+               ReferencedContainer = "container:mipsassembler.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "761AC5F81BF3CBCE003E6B31"
-            BuildableName = "assignment3"
-            BlueprintName = "assignment3"
-            ReferencedContainer = "container:assignment3.xcodeproj">
+            BuildableName = "Assembler"
+            BlueprintName = "Assembler"
+            ReferencedContainer = "container:mipsassembler.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -56,11 +56,18 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "761AC5F81BF3CBCE003E6B31"
-            BuildableName = "assignment3"
-            BlueprintName = "assignment3"
-            ReferencedContainer = "container:assignment3.xcodeproj">
+            BuildableName = "Assembler"
+            BlueprintName = "Assembler"
+            ReferencedContainer = "container:mipsassembler.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "fileInput"
+            value = "input.txt"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -75,9 +82,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "761AC5F81BF3CBCE003E6B31"
-            BuildableName = "assignment3"
-            BlueprintName = "assignment3"
-            ReferencedContainer = "container:assignment3.xcodeproj">
+            BuildableName = "Assembler"
+            BlueprintName = "Assembler"
+            ReferencedContainer = "container:mipsassembler.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

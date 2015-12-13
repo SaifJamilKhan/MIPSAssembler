@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		761AC5FD1BF3CBCE003E6B31 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 761AC5FC1BF3CBCE003E6B31 /* main.cpp */; };
-		761AC6071BF3CBE9003E6B31 /* kind.cc in Sources */ = {isa = PBXBuildFile; fileRef = 761AC6051BF3CBE9003E6B31 /* kind.cc */; settings = {ASSET_TAGS = (); }; };
-		761AC60A1BF3CBF3003E6B31 /* lexer.cc in Sources */ = {isa = PBXBuildFile; fileRef = 761AC6081BF3CBF3003E6B31 /* lexer.cc */; settings = {ASSET_TAGS = (); }; };
+		766B639D1C1E39A6005E6615 /* kind.cc in Sources */ = {isa = PBXBuildFile; fileRef = 766B63981C1E39A6005E6615 /* kind.cc */; settings = {ASSET_TAGS = (); }; };
+		766B639E1C1E39A6005E6615 /* lexer.cc in Sources */ = {isa = PBXBuildFile; fileRef = 766B639A1C1E39A6005E6615 /* lexer.cc */; settings = {ASSET_TAGS = (); }; };
+		766B639F1C1E39A6005E6615 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 766B639C1C1E39A6005E6615 /* main.cpp */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,14 +25,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		761AC5F91BF3CBCE003E6B31 /* assignment3 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = assignment3; sourceTree = BUILT_PRODUCTS_DIR; };
-		761AC5FC1BF3CBCE003E6B31 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		761AC6031BF3CBDF003E6B31 /* input */ = {isa = PBXFileReference; lastKnownFileType = text; path = input; sourceTree = "<group>"; };
-		761AC6041BF3CBDF003E6B31 /* input.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
-		761AC6051BF3CBE9003E6B31 /* kind.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = kind.cc; sourceTree = "<group>"; };
-		761AC6061BF3CBE9003E6B31 /* kind.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kind.h; sourceTree = "<group>"; };
-		761AC6081BF3CBF3003E6B31 /* lexer.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lexer.cc; sourceTree = "<group>"; };
-		761AC6091BF3CBF3003E6B31 /* lexer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lexer.h; sourceTree = "<group>"; };
+		761AC5F91BF3CBCE003E6B31 /* Assembler */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Assembler; sourceTree = BUILT_PRODUCTS_DIR; };
+		766B63961C1E39A6005E6615 /* input */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = input; path = MipsAssembler/input; sourceTree = SOURCE_ROOT; };
+		766B63971C1E39A6005E6615 /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = input.txt; path = MipsAssembler/input.txt; sourceTree = SOURCE_ROOT; };
+		766B63981C1E39A6005E6615 /* kind.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = kind.cc; path = MipsAssembler/kind.cc; sourceTree = SOURCE_ROOT; };
+		766B63991C1E39A6005E6615 /* kind.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kind.h; path = MipsAssembler/kind.h; sourceTree = SOURCE_ROOT; };
+		766B639A1C1E39A6005E6615 /* lexer.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = lexer.cc; path = MipsAssembler/lexer.cc; sourceTree = SOURCE_ROOT; };
+		766B639B1C1E39A6005E6615 /* lexer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lexer.h; path = MipsAssembler/lexer.h; sourceTree = SOURCE_ROOT; };
+		766B639C1C1E39A6005E6615 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = MipsAssembler/main.cpp; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,7 +49,7 @@
 		761AC5F01BF3CBCE003E6B31 = {
 			isa = PBXGroup;
 			children = (
-				761AC5FB1BF3CBCE003E6B31 /* assignment3 */,
+				761AC5FB1BF3CBCE003E6B31 /* MIPSAssembler */,
 				761AC5FA1BF3CBCE003E6B31 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -57,31 +57,32 @@
 		761AC5FA1BF3CBCE003E6B31 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				761AC5F91BF3CBCE003E6B31 /* assignment3 */,
+				761AC5F91BF3CBCE003E6B31 /* Assembler */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		761AC5FB1BF3CBCE003E6B31 /* assignment3 */ = {
+		761AC5FB1BF3CBCE003E6B31 /* MIPSAssembler */ = {
 			isa = PBXGroup;
 			children = (
-				761AC6051BF3CBE9003E6B31 /* kind.cc */,
-				761AC6081BF3CBF3003E6B31 /* lexer.cc */,
-				761AC6091BF3CBF3003E6B31 /* lexer.h */,
-				761AC6061BF3CBE9003E6B31 /* kind.h */,
-				761AC6031BF3CBDF003E6B31 /* input */,
-				761AC6041BF3CBDF003E6B31 /* input.txt */,
-				761AC5FC1BF3CBCE003E6B31 /* main.cpp */,
+				766B63961C1E39A6005E6615 /* input */,
+				766B63971C1E39A6005E6615 /* input.txt */,
+				766B63981C1E39A6005E6615 /* kind.cc */,
+				766B63991C1E39A6005E6615 /* kind.h */,
+				766B639A1C1E39A6005E6615 /* lexer.cc */,
+				766B639B1C1E39A6005E6615 /* lexer.h */,
+				766B639C1C1E39A6005E6615 /* main.cpp */,
 			);
+			name = MIPSAssembler;
 			path = assignment3;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		761AC5F81BF3CBCE003E6B31 /* assignment3 */ = {
+		761AC5F81BF3CBCE003E6B31 /* Assembler */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 761AC6001BF3CBCE003E6B31 /* Build configuration list for PBXNativeTarget "assignment3" */;
+			buildConfigurationList = 761AC6001BF3CBCE003E6B31 /* Build configuration list for PBXNativeTarget "Assembler" */;
 			buildPhases = (
 				761AC5F51BF3CBCE003E6B31 /* Sources */,
 				761AC5F61BF3CBCE003E6B31 /* Frameworks */,
@@ -91,9 +92,9 @@
 			);
 			dependencies = (
 			);
-			name = assignment3;
+			name = Assembler;
 			productName = assignment3;
-			productReference = 761AC5F91BF3CBCE003E6B31 /* assignment3 */;
+			productReference = 761AC5F91BF3CBCE003E6B31 /* Assembler */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -110,7 +111,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 761AC5F41BF3CBCE003E6B31 /* Build configuration list for PBXProject "assignment3" */;
+			buildConfigurationList = 761AC5F41BF3CBCE003E6B31 /* Build configuration list for PBXProject "mipsassembler" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -122,7 +123,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				761AC5F81BF3CBCE003E6B31 /* assignment3 */,
+				761AC5F81BF3CBCE003E6B31 /* Assembler */,
 			);
 		};
 /* End PBXProject section */
@@ -132,9 +133,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				761AC60A1BF3CBF3003E6B31 /* lexer.cc in Sources */,
-				761AC5FD1BF3CBCE003E6B31 /* main.cpp in Sources */,
-				761AC6071BF3CBE9003E6B31 /* kind.cc in Sources */,
+				766B639E1C1E39A6005E6615 /* lexer.cc in Sources */,
+				766B639D1C1E39A6005E6615 /* kind.cc in Sources */,
+				766B639F1C1E39A6005E6615 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -221,21 +222,21 @@
 		761AC6011BF3CBCE003E6B31 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Assembler;
 			};
 			name = Debug;
 		};
 		761AC6021BF3CBCE003E6B31 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Assembler;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		761AC5F41BF3CBCE003E6B31 /* Build configuration list for PBXProject "assignment3" */ = {
+		761AC5F41BF3CBCE003E6B31 /* Build configuration list for PBXProject "mipsassembler" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				761AC5FE1BF3CBCE003E6B31 /* Debug */,
@@ -244,13 +245,14 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		761AC6001BF3CBCE003E6B31 /* Build configuration list for PBXNativeTarget "assignment3" */ = {
+		761AC6001BF3CBCE003E6B31 /* Build configuration list for PBXNativeTarget "Assembler" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				761AC6011BF3CBCE003E6B31 /* Debug */,
 				761AC6021BF3CBCE003E6B31 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

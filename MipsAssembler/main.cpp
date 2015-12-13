@@ -97,52 +97,56 @@ void threeVariablesAndACommand(int first, int second, int third, int commandCons
 }
 
 int main(int argc, const char * argv[]) {
-    
-    
-    std::string singleLineInput;
-    std::getline (std::cin,singleLineInput);
-    std::string entireInput = singleLineInput;
+
     map<string, int> labelMap;
+    vector<std::vector<Token*>> tokensVector = *new vector<std::vector<Token*>>();
+    
     int lineNumber = 0;
     
     Lexer* lexer = new Lexer();
-    
-    while(singleLineInput.size() > 0) {
-        
-        std::vector<Token*> tokens = (*lexer).scan(singleLineInput);
+    std::string line;
+    int emptyLineCount = 0;
+    while (std::getline(std::cin, line))
+    {
+        if(line.size() <= 0) {
+            emptyLineCount ++;
+            if(emptyLineCount > 2) {
+                break;
+            }
+            cout << "here and count is " << emptyLineCount << endl;
+            continue;
+        } else {
+            emptyLineCount = 0;
+            cout << "not here and count is " << emptyLineCount << endl;
+        }
+        std::vector<Token*> tokens = (*lexer).scan(line);
+        tokensVector.insert(tokensVector.end(), tokens);
         if ((*tokens.at(0)).getKind() == LABEL){
             pair<string, int> pair = *new ::pair<string, int>();
             pair.second = lineNumber;
             pair.first = tokens.at(0)->getLexeme().substr(0, tokens.at(0)->getLexeme().size() - 1);
             labelMap.insert(pair);
         }
-        std::getline (std::cin,singleLineInput);
-        entireInput = entireInput + singleLineInput;
+        for(int x = 1; x < tokens.size(); x++) {
+            Token token = (*tokens[x]);
+            if(token.getKind() != LABEL) {
+                lineNumber++;
+                break;
+            }
+        }
+        std::getline (std::cin,line);
     }
     
-    std::istringstream iss(entireInput);
     
-   for (std::string input; std::getline(iss, input); ) {
-        bool isRealLine= false;
+    for (int v = 0; v < tokensVector.size(); v++) {
         
-        std::vector<Token*> tokens = (*lexer).scan(input);
+        std::vector<Token*> tokens = tokensVector.at(v);
         int idCode = NOTFOUND;
         if(tokens.size() > 0 && tokens.at(0)->getKind() != LABEL) {
             idCode = getIDCode((*tokens.at(0)).getLexeme());
         }
         for(int x = 0; x < tokens.size(); x++) {
             Token token = (*tokens[x]);
-            if ((*tokens.at(x)).getKind() == LABEL){
-                pair<string, int> pair = *new ::pair<string, int>();
-                pair.second = lineNumber;
-                pair.first = token.getLexeme().substr(0, token.getLexeme().size() - 1);
-                labelMap.insert(pair);
-            }
-            else {
-                if(!isRealLine) {
-                    lineNumber ++;
-                }
-                isRealLine = true;            }
             
             if (x > 0) {
                 
@@ -244,11 +248,6 @@ int main(int argc, const char * argv[]) {
             }
             
         }
-        if(isRealLine) {
-            lineNumber = lineNumber + 4;
-        }
-        
-        std::getline (std::cin,input);
     }
     
     typedef std::map<string, int>::iterator it_type;
